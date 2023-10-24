@@ -72,6 +72,7 @@
       "inputs": {
         "nixpkgs": "nixpkgs",
         "snowfall-lib": "snowfall-lib",
+        "t-smart-tmux": "t-smart-tmux",
         "unstable": "unstable"
       }
     },
@@ -109,6 +110,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "t-smart-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697816800,
+        "narHash": "sha256-0l+2ZRj9knjDRUiGePTt14UxrI0FNVHIdIZtKZs8bek=",
+        "owner": "joshmedeski",
+        "repo": "t-smart-tmux-session-manager",
+        "rev": "01b60128b4bebeedd7dc3a4b95d3257f70d4a417",
+        "type": "github"
+      },
+      "original": {
+        "owner": "joshmedeski",
+        "repo": "t-smart-tmux-session-manager",
         "type": "github"
       }
     },
