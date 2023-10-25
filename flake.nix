@@ -7,9 +7,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:snowfallorg/lib";
     };
-    t-smart-tmux = {
-      url = "github:joshmedeski/t-smart-tmux-session-manager";
+    tmux-session-wizard = {
       flake = false;
+      url = "github:27medkamal/tmux-session-wizard";
     };
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
