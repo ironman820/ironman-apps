@@ -2,6 +2,10 @@
   description = "My Nix Flakes";
 
   inputs = {
+    cellular-automaton = {
+      flake = false;
+      url = "github:eandrju/cellular-automaton.nvim";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     snowfall-lib = {
       inputs.nixpkgs.follows = "nixpkgs";
