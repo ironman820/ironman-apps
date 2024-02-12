@@ -7,12 +7,11 @@
 in
   mkDerivation rec {
     buildPhase = ''
-      mkdir -p $out/bin
-      cp $src/session-wizard.sh $out/bin/t
-      chmod +x $out/bin/t
+      mkdir -p $out/
+      cp $src/* $out/
     '';
     name = pname;
-    pname = "t";
+    pname = "ranger-devicons";
     phases = "buildPhase";
-    src = inputs.tmux-session-wizard;
+    src = inputs.ranger-devicons;
   }

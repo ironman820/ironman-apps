@@ -7,12 +7,11 @@
 in
   mkDerivation rec {
     buildPhase = ''
-      mkdir -p $out/bin
-      cp $src/session-wizard.sh $out/bin/t
-      chmod +x $out/bin/t
+      mkdir -p $out
+      cp $src/*.tmTheme $out/
     '';
     name = pname;
-    pname = "t";
+    pname = "catppuccin-bat";
     phases = "buildPhase";
-    src = inputs.tmux-session-wizard;
+    src = inputs.catppuccin-bat;
   }
