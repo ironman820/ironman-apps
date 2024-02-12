@@ -6,41 +6,33 @@
       flake = false;
       url = "github:eandrju/cellular-automaton.nvim";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    snowfall-lib = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:snowfallorg/lib";
-    };
+    flake-utils.url = "https://flakehub.com/f/numtide/flake-utils/0.1.*.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
     tmux-session-wizard = {
       flake = false;
       url = "github:27medkamal/tmux-session-wizard";
     };
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    tochd = {
+      flake = false;
+      url = "github:ironman820/tochd";
+    };
+    unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
   };
 
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
-
-      snowfall = {
-        meta = {
-          name = "ironman-apps";
-          title = "Ironman Apps";
-        };
-        namespace = "ironman";
+  outputs = {
+    flake-utils,
+    nixpkgs,
+    ...
+  } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+      # lib = pkgs.lib // import ./lib {inherit (pkgs) lib;};
+    in {
+      packages = {
+        tochd = import ./packages/tochd {inherit inputs pkgs;};
       };
-    };
-  in lib.mkFlake {
-    channels-config = {
-      allowUnfree = true;
-    };
-
-    # overlays = with inputs; [
-    # ];
-
-    alias = {
-      shells.default = "ironman-shell";
-    };
-  };
+      devShells.default = import ./shells/ironman-shell {
+        inherit pkgs;
+      };
+    });
 }
