@@ -1,9 +1,9 @@
 {
   inputs,
-  pkgs,
+  stdenv,
   ...
 }: let
-  inherit (pkgs.stdenv) mkDerivation;
+  inherit (stdenv) mkDerivation;
 in
   mkDerivation rec {
     buildPhase = ''

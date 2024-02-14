@@ -1,11 +1,11 @@
-{ lib
-, inputs
-, pkgs
-, stdenv
-}:
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   inherit (pkgs.vimUtils) buildVimPlugin;
-in buildVimPlugin rec {
-  name = "cellular-automaton";
-  src = inputs.cellular-automaton;
-}
+in
+  buildVimPlugin {
+    name = "cellular-automaton";
+    src = inputs.cellular-automaton-nvim;
+  }

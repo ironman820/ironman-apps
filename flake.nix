@@ -86,6 +86,10 @@
       flake = false;
       url = "github:catppuccin/sddm";
     };
+    snowfall-lib = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "https://flakehub.com/f/snowfallorg/lib/2.*.tar.gz";
+    };
     tmux-cheat-sh = {
       flake = false;
       url = "github:ironman820/tmux-cheat-sh";
@@ -109,55 +113,20 @@
     };
   };
 
-  outputs = {
-    flake-utils,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (builtins) listToAttrs map;
-    packageList = [
-      "catppuccin-bat"
-      "catppuccin-btop"
-      "catppuccin-grub"
-      "catppuccin-kitty"
-      "catppuccin-lazygit"
-      "catppuccin-neomutt"
-      "catppuccin-rofi"
-      "catppuccin-starship"
-      "catppuccin-tmux"
-      "cellular-automaton-nvim"
-      "cheat-sh"
-      "cloak-nvim"
-      "conceal-nvim"
-      "idracclient"
-      "nvim-cmp-nerdfont"
-      "nvim-undotree"
-      "obsidian-nvim"
-      "one-small-step-for-vimkind"
-      "open-android-backup"
-      "php"
-      "ranger-devicons"
-      "sddm-catppuccin"
-      "start-waybar"
-      "switchssh"
-      "t"
-      "tmux-fzf-url"
-      "tmux-session-wizard"
-      "tochd"
-      "yanky-nvim"
-    ];
-  in
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-      # lib = pkgs.lib // import ./lib {inherit (pkgs) lib;};
-    in {
-      packages = listToAttrs (map (pkg: {
-          name = pkg;
-          value = import ./packages/${pkg} {inherit inputs pkgs;};
-        })
-        packageList);
-      devShells.default = import ./shells/ironman-shell {
-        inherit pkgs;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
+
+      snowfall = {
+        meta = {
+          name = "ironman-apps";
+          title = "Ironmans Applications";
+        };
+        namespace = "ironman";
       };
-    });
+    };
+  in
+    lib.mkFlake {
+    };
 }
