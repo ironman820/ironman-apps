@@ -56,7 +56,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:mic92/nix-ld";
     };
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2311.*.tar.gz";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # acc5f7b - IcedTea v8 Stable
     nixpkgs-acc5f7b.url = "github:nixos/nixpkgs/acc5f7b";
     # ba45a55 - The last stable update of PHP 7.4
